@@ -1,6 +1,7 @@
 import React from 'react';
 import StockCarousel from './Carousel'
 import TopStock from './StockOfTheDay'
+import ConnectAccount from './ConnectAccount';
 
 const topStock = {
   stock: "AAPL",
@@ -20,6 +21,9 @@ function MainContent() {
       <StockCarousel/>
       <div>
             <TopStock stock={topStock.stock} price={topStock.price} description={topStock.description} />
+        </div>
+        <div>
+      <ConnectAccount/>
         </div>
     </div>
   );

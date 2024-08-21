@@ -103,6 +103,30 @@
   text-align: center;
 }
 
+.connect-account{
+  display: flex;
+  justify-content: center;
+}
+
+.connect-account-button{
+  padding: 8px 16px;
+  background-color: #b2a40e;
+  margin-top: 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 10px;
+  height: 45px;
+}
+
+.connect-account-button:hover{
+  background-color: #6e7205;
+  transform: scale(1.05);
+}
+
 .footer {
   background-color: #333;
   color: white;

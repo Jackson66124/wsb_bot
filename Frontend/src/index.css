@@ -1,0 +1,102 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  top: 0;
+  left: 0;
+  background-color: black;
+  padding: 10px 0;
+  padding-top: 40px;
+  padding-left: 10px;
+  position: relative;
+}
+
+@font-face {
+  font-family: 'CercoDEMO-Medium';
+  src: url('./assets/CercoDEMO-Medium.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.header-title{
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  align-items: center;
+  color: white;
+  font-family: 'CercoDEMO-Medium';
+  font-size:45px;
+  letter-spacing: 1px;
+}
+
+.login-button{
+  padding: 8px 16px;
+  background-color: #058233;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 10px;
+  height: 45px;
+}
+
+.login-button:hover {
+  background-color: #046c2a;
+  transform: scale(1.05);
+}
+
+.mainContent{
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.mainContent-title{
+  font-size: 24px;
+  font-family: 'CercoDEMO-Medium';
+  color: #020000;
+  margin-bottom: 50px;
+  text-align: center
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.stock-card {
+  padding: 20px;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.stock-ticker {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'CercoDEMO-Medium';
+}
+
+.slick-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.slick-prev, .slick-next {
+  z-index: 1;
+}
+
+.slick-next {
+  right: -45px;
+}
+
+.slick-prev {
+  left: -45px;
+}
+
+.top-stock{
+  text-align: center;
+  font-family: 'CercoDEMO-Medium';
+}

@@ -5,7 +5,9 @@ import TopStock from './StockOfTheDay'
 const topStock = {
   stock: "AAPL",
   price: "$150",
-  description: "Apple has been identified as the top stock of the day by our sentiment analysis bot."
+  description: 'Apple has been identified as the top stock of the day by our sentiment analysis bot. Our bot uses a deep learning model that ' +
+  'has been trained on real data from r/wallstreetbets. Click the button below to connect your alpaca account and let our bot start trading for ' +
+  'you automatically, every day!'
 };
 
 function MainContent() {

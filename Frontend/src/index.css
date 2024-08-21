@@ -97,6 +97,46 @@
 }
 
 .top-stock{
-  text-align: center;
+  margin: 0 auto;
   font-family: 'CercoDEMO-Medium';
+  max-width: 650px;
+  text-align: center;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-links {
+  list-style-type: none;
+  margin: 10px 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-links li {
+  margin: 0 15px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
 }

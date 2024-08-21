@@ -164,3 +164,50 @@
 .footer-links a:hover {
   text-decoration: underline;
 }
+
+.stock-datepicker{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stock-datepicker h1 {
+  font-family: 'CercoDEMO-Medium';  /* Use your custom font */
+  font-size: 24px;
+  color: #020000;
+  margin-bottom: 10px;  /* Space between title and date picker */
+  margin-top: 10px;
+}
+
+.react-datepicker-wrapper {
+  width: auto;  /* Ensure date picker width adapts */
+}
+
+.react-datepicker__input-container input {
+  padding: 10px 15px;
+  border: 1px solid #b2a40e;  /* Matching border color */
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'CercoDEMO-Medium';
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+  text-align: center;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  border-color: #058233;  /* Change border color on focus */
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #058233;  /* Match selected day color with your theme */
+  color: white;
+}
+
+.react-datepicker__day--hovered {
+  background-color: #b2a40e;  /* Change background on hover */
+  color: white;
+}

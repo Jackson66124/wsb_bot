@@ -2,6 +2,7 @@ import React from 'react';
 import StockCarousel from './Carousel'
 import TopStock from './StockOfTheDay'
 import ConnectAccount from './ConnectAccount';
+import StockDatepicker from './StockDatepicker';
 
 const topStock = {
   stock: "AAPL",
@@ -24,6 +25,9 @@ function MainContent() {
         </div>
         <div>
       <ConnectAccount/>
+        </div>
+        <div>
+        <StockDatepicker/>
         </div>
     </div>
   );

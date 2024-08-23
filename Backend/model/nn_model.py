@@ -4,7 +4,7 @@ import tensorflow_hub as hub
 import tf_keras
 import pandas as pd
 
-excel_file = 'Backend\csv_files\WSB_Bot_Data.csv'
+excel_file = 'Backend\model\csv_files\WSB_Bot_Data.csv'
 df = pd.read_csv(excel_file)
 
 #force sentiment column as int

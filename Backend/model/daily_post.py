@@ -14,8 +14,8 @@ configure()
 #allow console utf-8 encoding for emojis
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-model = load_model('Backend\WSB_Sentiment_Model')
-df = pd.read_csv('Backend\csv_files\stock_tickers.csv')
+model = load_model('Backend\model\WSB_Sentiment_Model')
+df = pd.read_csv('Backend\model\csv_files\stock_tickers.csv')
 
 tickers = df['Symbol'].tolist()
 

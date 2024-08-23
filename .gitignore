@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-Backend/.env
+Backend/model/.env
 Backend/__pycache__/
 Frontend/node_modules
 ./node_modules

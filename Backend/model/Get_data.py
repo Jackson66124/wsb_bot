@@ -14,7 +14,7 @@ reddit = praw.Reddit(
     user_agent='WSB_Bot by Jackson Kight'
 )
 
-file_path = 'Backend\csv_files\WSB_Bot_Data.csv'
+file_path = 'Backend\model\csv_files\WSB_Bot_Data.csv'
 
 subreddit = reddit.subreddit("wallstreetbets")
 

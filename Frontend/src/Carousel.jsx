@@ -12,15 +12,7 @@ function Arrow(props) {
     return (
       <div
         className={className}
-        style={{ ...style, 
-          display: "block",
-          background: "black",
-          borderRadius: "50%", 
-          padding: "10px", 
-          width: "20px", 
-          height: "20px", 
-          opacity: 1,
-        }}
+        style={{ ...style, display: "block", background: "black", borderRadius: "50%" }}
         onClick={onClick}
       />
     );

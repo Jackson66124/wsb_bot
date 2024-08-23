@@ -58,7 +58,7 @@
   font-size: 24px;
   font-family: 'CercoDEMO-Medium';
   color: #020000;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   text-align: center
 }
 
@@ -79,15 +79,6 @@
   font-family: 'CercoDEMO-Medium';
 }
 
-.slick-slide {
-  display: flex;
-  justify-content: center;
-}
-
-.slick-prev, .slick-next {
-  z-index: 1;
-}
-
 .slick-next {
   right: -45px;
 }
@@ -101,6 +92,7 @@
   font-family: 'CercoDEMO-Medium';
   max-width: 650px;
   text-align: center;
+  margin-top: 40px;
 }
 
 .connect-account{

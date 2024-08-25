@@ -3,10 +3,7 @@ import csv
 from dotenv import load_dotenv
 import os
 
-def configure():
-    load_dotenv()
-
-configure()
+load_dotenv()
 
 reddit = praw.Reddit(
     client_id=os.getenv('client_id'),

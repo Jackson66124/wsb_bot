@@ -6,10 +6,10 @@ import pandas as pd
 import re
 import sys
 import io
-from Get_data import configure
 import os
+from dotenv import load_dotenv
 
-configure()
+load_dotenv()
 
 #allow console utf-8 encoding for emojis
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')

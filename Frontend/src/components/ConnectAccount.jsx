@@ -1,5 +1,4 @@
-
-
+import '../styles/ConnectAccount.css'
 
 function TopStock() {
     return (

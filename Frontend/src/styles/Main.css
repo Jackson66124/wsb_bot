@@ -1,0 +1,12 @@
+.mainContent{
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .mainContent-title{
+    font-size: 24px;
+    font-family: 'CercoDEMO-Medium';
+    color: #020000;
+    margin-bottom: 20px;
+    text-align: center
+  }

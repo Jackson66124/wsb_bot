@@ -1,3 +1,4 @@
+import '../styles/CarouselCard.css'
 
 function Card ({ stock, value }) {
 

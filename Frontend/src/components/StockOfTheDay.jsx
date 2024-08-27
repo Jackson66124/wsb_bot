@@ -1,4 +1,4 @@
-
+import '../styles/TopStock.css'
 
 import React from 'react';
 

@@ -1,0 +1,38 @@
+.header {
+    top: 0;
+    left: 0;
+    background-color: black;
+    padding: 10px 0;
+    padding-top: 40px;
+    padding-left: 10px;
+    position: relative;
+  }
+  
+  .header-title{
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    align-items: center;
+    color: white;
+    font-family: 'CercoDEMO-Medium';
+    font-size:45px;
+    letter-spacing: 1px;
+  }
+  
+  .login-button{
+    padding: 8px 16px;
+    background-color: #058233;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 10px;
+    height: 45px;
+  }
+  
+  .login-button:hover {
+    background-color: #046c2a;
+    transform: scale(1.05);
+  }

@@ -1,8 +1,9 @@
 import React from 'react';
-import StockCarousel from './Carousel'
-import TopStock from './StockOfTheDay'
-import ConnectAccount from './ConnectAccount';
-import StockDatepicker from './StockDatepicker';
+import StockCarousel from '../components/Carousel'
+import TopStock from '../components/StockOfTheDay'
+import ConnectAccount from '../components/ConnectAccount';
+import StockDatepicker from '../components/StockDatepicker';
+import '../styles/main.css'
 
 const topStock = {
   stock: "AAPL",

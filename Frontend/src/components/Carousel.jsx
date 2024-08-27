@@ -3,6 +3,7 @@ import Slider from 'react-slick'
 import Card from './Card'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import '../styles/CarouselCard.css'
 
 let stockTicker = ["AAPL", "TSLA", "AMZN", "GOOGL", "MSFT", "GME"]
 let stockValue = [99, 89, 87, 66.45, 45.34, 23.21]
@@ -49,7 +50,7 @@ const StockCarousel = () => {
       };
 
     return (
-        <div className = 'container'>
+        <div className = 'carousel-container'>
         <Slider {...settings}>
           <div>
           <h3><Card stock={`$${stockTicker[0]}`} value={stockValue[0]} /></h3>

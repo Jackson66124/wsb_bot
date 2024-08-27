@@ -1,6 +1,7 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import { useState } from "react"
+import '../styles/Datepicker.css'
 
 function StockDatepicker() {
     const [selectedDate, setSelectedDate] = useState(null);

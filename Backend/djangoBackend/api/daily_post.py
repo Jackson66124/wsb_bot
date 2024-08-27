@@ -50,8 +50,8 @@ for post in data:
     if post["label"] == 1:
         top_pos_posts.append(post["title"])
 
-def check_for_stock():
-    for title in top_pos_posts:
+def check_for_stock(posts):
+    for title in posts:
         cleaned_string = re.sub(r'[^a-zA-Z ]', '', title)
         stock_finder = cleaned_string.split()
         for tick in tickers:
@@ -59,8 +59,8 @@ def check_for_stock():
                 if stock == tick:
                     return tick
 
-def get_trending_stocks():
-    for title in trending_stocks:
+def get_trending_stocks(stocks):
+    for title in stocks:
         cleaned_string = re.sub(r'[^a-zA-Z ]', '', title)
         stock_finder = cleaned_string.split()
         for tick in tickers:
@@ -68,6 +68,6 @@ def get_trending_stocks():
                 if stock == tick:
                     top_tickers.append(stock)
 
-get_trending_stocks()
+get_trending_stocks(trending_stocks)
 for stock in top_tickers:
     print(stock)

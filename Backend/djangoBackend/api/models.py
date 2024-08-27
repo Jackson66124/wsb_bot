@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Stock(models.Model):
     symbol = models.CharField(max_length=10)

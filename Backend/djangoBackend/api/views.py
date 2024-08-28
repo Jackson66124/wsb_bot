@@ -2,15 +2,21 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status, generics
-from .models import Stock, TopStock
+from .models import Stock, TopStock, UserToken
 from .serializer import StockSerializer, TopStockSerializer, UserSerializer
 from dotenv import load_dotenv
-import os
+import os, jwt
 import requests
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.conf import settings
+from rest_framework_simplejwt.tokens import AccessToken
+from django.shortcuts import get_object_or_404
+
 
 load_dotenv()
+
+User = get_user_model()
 
 # Create your views here.
 @api_view(['GET'])
@@ -43,8 +49,14 @@ def get_top_stock(request):
 
 def callback_view(request):
     auth_code = request.GET.get('code')
+    jwt_token = request.COOKIES.get('temp_jwt')
+
     if not auth_code:
         return HttpResponse("No authorization code found", status=400)
+    
+    if not jwt_token:
+        return HttpResponse("No JWT token found", status=400)
+    
     url = 'https://api.alpaca.markets/oauth/token'
     data = {
         'grant_type': 'authorization_code',
@@ -55,14 +67,40 @@ def callback_view(request):
     }
     response = requests.post(url, data=data)
 
+    try:
+        decoded_jwt = decode_jwt(jwt_token)
+        user_id = decoded_jwt['user_id']
+    except Exception as e:
+        return Response({'error': 'JWT token could not be decoded'})
+
     if response.status_code == 200:
-        access_token = response.json().get('access_token')
+        alpaca_access_token = response.json().get('access_token')
         token_type = response.json().get('token_type')
         scope = response.json().get('scope')
-        return JsonResponse(f'{token_type}, {access_token}, {scope}', safe=False)
+
+        try:
+            user = get_object_or_404(User, id=user_id)
+            user_token = UserToken.objects.get_or_create(user=user)
+
+            user_token.token = alpaca_access_token
+            user_token.save()
+        except:
+            return JsonResponse(f'Error Updating Token')
+
+
+        return JsonResponse(f'{token_type}, {alpaca_access_token}, {scope}, {decoded_jwt}', safe=False)
     else:
         error_message = f'Failed to obtain access token. Response: {response.text}'
         return HttpResponse(error_message, status=response.status_code)
+    
+def decode_jwt(token):
+    try:
+        decoded = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        return decoded
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()

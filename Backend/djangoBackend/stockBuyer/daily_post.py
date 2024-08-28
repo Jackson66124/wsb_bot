@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-#allow console utf-8 encoding for emojis
+#allow console utf-8 encoding for emojis for testing
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 model = load_model('Backend\model\WSB_Sentiment_Model')

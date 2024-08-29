@@ -3,8 +3,8 @@ import StockCarousel from '../components/Carousel'
 import TopStock from '../components/StockOfTheDay'
 import ConnectAccount from '../components/ConnectAccount';
 import StockDatepicker from '../components/StockDatepicker';
-import FetchStocks from '../components/FetchStocks';
 import '../styles/main.css'
+import FetchTopStock from '../components/FetchTopStock';
 
 const extra = {
   price: "$150",
@@ -14,8 +14,8 @@ const extra = {
 };
 
 function MainContent() {
-const { topStock } = FetchStocks();
-let top_stock = topStock;
+const { symbol } = FetchTopStock();
+let top_stock = symbol;
   return (
     <div className='mainContent'>
       <h2 className = "mainContent-title">
@@ -23,7 +23,15 @@ let top_stock = topStock;
       </h2>
       <StockCarousel/>
       <div>
-            <TopStock stock={top_stock} price={extra.price} description={extra.description} />
+      {top_stock.map((stock, index) => (
+          <div key={index}>
+            <TopStock 
+              stock={stock} 
+              price={extra.price} 
+              description={extra.description} 
+            />
+          </div>
+        ))}
         </div>
         <div>
       <ConnectAccount/>

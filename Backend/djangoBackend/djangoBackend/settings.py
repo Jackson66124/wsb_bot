@@ -46,6 +46,8 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
+INTERNAL_API_TOKEN = os.getenv('INTERNAL_API_TOKEN')
+
 # Application definition
 
 INSTALLED_APPS = [

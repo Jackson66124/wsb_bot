@@ -4,7 +4,7 @@ import Card from './Card'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import '../styles/CarouselCard.css'
-import FetchStocks from './FetchStocks';
+import FetchTrendingStocks from './FetchTrendingStocks'
 
 let stockValue = [99, 89, 87, 66.45, 45.34, 23.21]
 let historicalData = [
@@ -30,8 +30,9 @@ function Arrow(props) {
   }
 
 const StockCarousel = () => {
-  const { topTickers } = FetchStocks();
-  let stockTicker = topTickers;
+  const { symbols } = FetchTrendingStocks();
+  let stockTicker = symbols;
+
     var settings = {
         dots: true,
         infinite: true,

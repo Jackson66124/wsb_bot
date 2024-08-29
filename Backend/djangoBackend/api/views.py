@@ -13,6 +13,11 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 import pandas as pd
+from .custom_auth import InternalAPIAuthentication
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from .custom_permissions import IsAuthenticatedOrInternal
+from datetime import datetime
 
 
 load_dotenv()
@@ -21,12 +26,23 @@ User = get_user_model()
 
 # Create your views here.
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_stocks(request):
-    symbols = Stock.objects.all()
+    date_str = request.GET.get('date', None)
+    if date_str:
+        try:
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+            symbols = Stock.objects.filter(date=date_obj)
+        except ValueError:
+            return Response({'Error'}, status=400)
+    else : 
+        symbols = Stock.objects.all()
     serializer = StockSerializer(symbols, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
+@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@permission_classes([IsAuthenticatedOrInternal])
 def create_stock(request):
     serializer = StockSerializer(data=request.data)
     if serializer.is_valid():
@@ -35,6 +51,8 @@ def create_stock(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
+@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@permission_classes([IsAuthenticatedOrInternal])
 def create_top_stock(request):
     serializer = TopStockSerializer(data=request.data)
     if serializer.is_valid():
@@ -43,8 +61,10 @@ def create_top_stock(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_top_stock(request):
-    symbols = TopStock.objects.all()
+    today = datetime.now().date()
+    symbols = TopStock.objects.filter(date=today)
     serializer = TopStockSerializer(symbols, many=True)
     return Response(serializer.data)
 
@@ -107,17 +127,3 @@ class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-
-class TopStocksView(APIView):
-    permission_classes = [AllowAny]
-
-    def get(self, request):
-
-        file_path = os.path.join('..', '..', 'Backend', 'model', 'csv_files', 'Top_stocks.csv')
-        df = pd.read_csv(file_path)
-
-        top_tickers = df["Top Tickers"].dropna().tolist()
-        top_stock = df["Top Stock"].dropna().tolist() 
-                    
-        return Response({"top_tickers": top_tickers, "top_stock": top_stock})
-

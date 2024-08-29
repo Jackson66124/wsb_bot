@@ -1,13 +1,10 @@
 import praw
-from tf_keras.models import load_model
 import pandas as pd
 import tensorflow as tf
 import pandas as pd
-import re
-import sys
-import io
-import os
+import re, sys, io, os, csv
 from dotenv import load_dotenv
+from tf_keras.models import load_model
 
 load_dotenv()
 
@@ -16,7 +13,6 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 model = load_model('Backend\model\WSB_Sentiment_Model')
 df = pd.read_csv('Backend\model\csv_files\stock_tickers.csv')
-
 tickers = df['Symbol'].tolist()
 
 reddit = praw.Reddit(
@@ -26,8 +22,8 @@ reddit = praw.Reddit(
 )
 
 daily_posts = []
-trending_stocks = []
 top_tickers = []
+trending_stocks = []
 
 def get_top_posts():
     subreddit = reddit.subreddit("wallstreetbets")
@@ -69,5 +65,21 @@ def get_trending_stocks(stocks):
                     top_tickers.append(stock)
 
 get_trending_stocks(trending_stocks)
-for stock in top_tickers:
-    print(stock)
+
+top_stock = check_for_stock(top_pos_posts)
+
+def write_stocks_to_csv(top_tickers, top_stock):
+    with open('Backend\model\csv_files\Top_stocks.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Top Tickers", "Top Stock"])
+
+        writer.writerow([top_tickers[0], top_stock])
+        tickers_used = []
+        tickers_used.append(top_tickers[0])
+
+        for ticker in top_tickers[1:]:
+            if ticker not in tickers_used:
+                writer.writerow([ticker, ''])
+                tickers_used.append(ticker)
+
+write_stocks_to_csv(top_tickers, top_stock)

@@ -14,7 +14,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangoBackend.settings")
 django.setup()
 from api.models import UserToken
 
-
 def place_paper_order(stock, token):
     url = "https://paper-api.alpaca.markets/v2/orders"
     headers = {

@@ -1,7 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import  AllowAny
 from rest_framework import status, generics
+from rest_framework.views import APIView
 from .models import Stock, TopStock, UserToken
 from .serializer import StockSerializer, TopStockSerializer, UserSerializer
 from dotenv import load_dotenv
@@ -10,8 +11,8 @@ import requests
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import get_user_model
 from django.conf import settings
-from rest_framework_simplejwt.tokens import AccessToken
 from django.shortcuts import get_object_or_404
+import pandas as pd
 
 
 load_dotenv()
@@ -106,3 +107,17 @@ class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+class TopStocksView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+
+        file_path = os.path.join('..', '..', 'Backend', 'model', 'csv_files', 'Top_stocks.csv')
+        df = pd.read_csv(file_path)
+
+        top_tickers = df["Top Tickers"].dropna().tolist()
+        top_stock = df["Top Stock"].dropna().tolist() 
+                    
+        return Response({"top_tickers": top_tickers, "top_stock": top_stock})
+

@@ -8,7 +8,7 @@ function TopStock({ stock, price, description }) {
             <h2>Top Stock of the Day</h2>
             <h3 className="top-stock-ticker">{stock}</h3>
             <p className="top-stock-price">{price}</p>
-            <p className="top-stock-description">{description}</p>
+            <p className="top-stock-description">{stock + description}</p>
         </div>
     );
 }

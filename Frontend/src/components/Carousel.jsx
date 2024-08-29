@@ -4,9 +4,19 @@ import Card from './Card'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import '../styles/CarouselCard.css'
+import FetchStocks from './FetchStocks';
 
-let stockTicker = ["AAPL", "TSLA", "AMZN", "GOOGL", "MSFT", "GME"]
 let stockValue = [99, 89, 87, 66.45, 45.34, 23.21]
+let historicalData = [
+  { time: '09:30', price: 175.23 },
+  { time: '10:30', price: 176.45 },
+  { time: '11:30', price: 177.12 },
+  { time: '12:30', price: 176.78 },
+  { time: '13:30', price: 176.54 },
+  { time: '14:30', price: 174.45 },
+  { time: '15:30', price: 173.89 },
+  { time: '16:00', price: 173.22 },
+];
 
 function Arrow(props) {
     const { className, style, onClick } = props;
@@ -20,6 +30,8 @@ function Arrow(props) {
   }
 
 const StockCarousel = () => {
+  const { topTickers } = FetchStocks();
+  let stockTicker = topTickers;
     var settings = {
         dots: true,
         infinite: true,
@@ -49,28 +61,19 @@ const StockCarousel = () => {
         ]
       };
 
-    return (
-        <div className = 'carousel-container'>
-        <Slider {...settings}>
-          <div>
-          <h3><Card stock={`$${stockTicker[0]}`} value={stockValue[0]} /></h3>
-          </div>
-          <div>
-            <h3><Card stock={`$${stockTicker[1]}`} value={stockValue[1]} /></h3>
-          </div>
-          <div>
-          <h3><Card stock={`$${stockTicker[2]}`} value={stockValue[2]} /></h3>
-          </div>
-          <div>
-          <h3><Card stock={`$${stockTicker[3]}`} value={stockValue[3]} /></h3>
-          </div>
-          <div>
-          <h3><Card stock={`$${stockTicker[4]}`} value={stockValue[4]} /></h3>
-          </div>
-          <div>
-          <h3><Card stock={`$${stockTicker[5]}`} value={stockValue[5]} /></h3>
-          </div>
-        </Slider>
+      return (
+        <div className='carousel-container'>
+          <Slider {...settings}>
+            {stockTicker.map((ticker, index) => (
+              <div key={index}>
+                <Card 
+                  stock={`$${ticker}`} 
+                  value={stockValue[index]} 
+                  historicalData={historicalData} 
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
       );
 }

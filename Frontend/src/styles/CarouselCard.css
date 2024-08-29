@@ -5,8 +5,10 @@
   
   .stock-card {
     padding: 20px;
-    text-align: center;
     background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .stock-ticker {

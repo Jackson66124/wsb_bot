@@ -30,6 +30,7 @@ const ConditionalHeader = () => {
 
 function App() {
   return (
+    <div class="site">
     <BrowserRouter>
       <ConditionalHeader />
       <Routes>
@@ -51,6 +52,7 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
+    </div>
   );
 }
 

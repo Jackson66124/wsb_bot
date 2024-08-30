@@ -9,3 +9,10 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.site {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+}

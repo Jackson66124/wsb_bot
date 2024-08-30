@@ -21,4 +21,13 @@
     background-color: #6e7205;
     transform: scale(1.05);
   }
+
+  .reconnect-account{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: large;
+    font-family: 'CercoDEMO-Medium';
+  }
   

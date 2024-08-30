@@ -6,7 +6,7 @@ const client_id = '417db213be83cf52f1eea3401059d617'
 const redirect_uri = "http://localhost:8000/callback/"
 const auth_url = `https://app.alpaca.markets/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=trading`
 
-const TopStock = () => {
+const ConnectAccount = () => {
     const handleClick = (e) => {
         e.preventDefault();
         const token = localStorage.getItem(ACCESS_TOKEN);
@@ -26,4 +26,4 @@ const TopStock = () => {
     );
 }
 
-export default TopStock;
+export default ConnectAccount;

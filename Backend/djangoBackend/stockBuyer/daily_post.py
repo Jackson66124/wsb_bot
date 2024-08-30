@@ -115,6 +115,6 @@ def create_stock_http(stock):
     
     return None
 
-create_top_stock_http(top_stock)
+top_stock_of_day = create_top_stock_http(top_stock)
 for ticker in top_tickers:
     create_stock_http(ticker)

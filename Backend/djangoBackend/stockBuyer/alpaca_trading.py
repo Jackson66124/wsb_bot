@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
-from daily_post import top_pos_posts, check_for_stock, top_tickers
+from daily_post import top_stock_of_day
 import requests
-from django import apps
 import os
 import sys
 import django
@@ -59,7 +58,6 @@ def place_real_order(stock, token):
         return None
     
 #Place paper order for every connected user
-top_stock = check_for_stock(top_pos_posts)
 user_tokens = UserToken.objects.all()
 for user_token in user_tokens:
-    place_paper_order(top_stock, user_token.token)
+    place_paper_order(top_stock_of_day, user_token.token)

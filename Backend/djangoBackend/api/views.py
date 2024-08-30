@@ -101,12 +101,12 @@ def callback_view(request):
 
         try:
             user = get_object_or_404(User, id=user_id)
-            user_token = UserToken.objects.get_or_create(user=user)
+            user_token, created = UserToken.objects.get_or_create(user=user)
 
             user_token.token = alpaca_access_token
             user_token.save()
-        except:
-            return JsonResponse(f'Error Updating Token')
+        except Exception as e:
+            return JsonResponse({'error': f'Error Updating Token: {str(e)}'}, status=500)
 
 
         return JsonResponse(f'{token_type}, {alpaca_access_token}, {scope}, {decoded_jwt}', safe=False)

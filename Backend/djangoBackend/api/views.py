@@ -135,12 +135,12 @@ def check_alpaca_token(request):
     auth_header = request.headers.get('Authorization')
     token = auth_header.split(' ')[1]
 
-    payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+    payload = decode_jwt(token)
     user_id = payload['user_id']
 
     user = get_object_or_404(User, id=user_id)
 
     if hasattr(user, 'alpaca_token') and user.alpaca_token:
-        return Response({'has_alpaca_token': True}, status=status.HTTP_200_OK)
+            return Response({'has_alpaca_token': True}, status=status.HTTP_200_OK)
     else:
         return Response({'has_alpaca_token': False}, status=status.HTTP_200_OK)

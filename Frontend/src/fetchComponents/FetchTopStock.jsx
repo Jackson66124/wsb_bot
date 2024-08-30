@@ -8,9 +8,7 @@ const FetchTopStock = () => {
         const fetchStock = async () => {
             try {
                 const response = await axios.get('http://127.0.0.1:8000/stock/topstock/', );
-                console.log(response);
                 const extractedSymbol = response.data.map(stock => stock.symbol);
-                console.log(extractedSymbol);
                 SetSymbol(extractedSymbol)
 
             } catch (err) {

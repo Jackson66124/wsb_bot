@@ -4,7 +4,7 @@ import TopStock from '../components/StockOfTheDay'
 import ConnectAccount from '../components/ConnectAccount';
 import StockDatepicker from '../components/StockDatepicker';
 import '../styles/main.css'
-import FetchTopStock from '../components/FetchTopStock';
+import FetchTopStock from '../fetchComponents/FetchTopStock';
 
 const extra = {
   price: "$150",

@@ -44,3 +44,18 @@
     background-color: #b2a40e;
     color: white;
   }
+
+  .datepicker-list {
+    list-style-type: none;  
+    margin: 0;              
+    padding: 0;            
+  }
+  
+  .datepicker-list li {
+    padding: 10px 15px;    
+    margin-bottom: 5px;     
+    background-color: #f9f9f9; 
+    border-radius: 5px;     
+    cursor: pointer;        
+    transition: background-color 0.3s; 
+  }

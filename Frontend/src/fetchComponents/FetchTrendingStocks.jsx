@@ -1,19 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const getTodayDate = () => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
-  };
-
-  const FetchTrendingStocks = () => {
+  const FetchTrendingStocks = ( {date} ) => {
     const [symbols, setSymbols] = useState([]);
 
     useEffect(() => {
         const fetchStocks = async () => {
             try {
-                const today = getTodayDate();
-                const response = await axios.get(`http://127.0.0.1:8000/stock/?date=${today}`);
+                const response = await axios.get(`http://127.0.0.1:8000/stock/?date=${date}`);
                 const extractedSymbols = response.data.map(stock => stock.symbol);
                 setSymbols(extractedSymbols);
             } catch (err) {

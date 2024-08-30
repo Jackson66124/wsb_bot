@@ -7,21 +7,10 @@ import axios from 'axios';
 function Header() {
     const navigate = useNavigate();
 
-    //set title to home or connected for connected users
     const handleClick = async (e) => {
         e.preventDefault();
         try {
-            const token = localStorage.getItem(ACCESS_TOKEN);
-            const tokenCheckRes = await axios.get('http://127.0.0.1:8000/check-alpaca-token/', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            if (tokenCheckRes.data.has_alpaca_token) {
-                navigate("/connected")
-            } else {
-                navigate("/home")
-            }
+            navigate("/")
         }
         catch (error) {
             alert(error)

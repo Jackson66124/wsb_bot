@@ -18,6 +18,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .custom_permissions import IsAuthenticatedOrInternal
 from datetime import datetime
+from django.http import HttpResponseRedirect
 
 
 load_dotenv()
@@ -108,8 +109,8 @@ def callback_view(request):
         except Exception as e:
             return JsonResponse({'error': f'Error Updating Token: {str(e)}'}, status=500)
 
-
-        return JsonResponse(f'{token_type}, {alpaca_access_token}, {scope}, {decoded_jwt}', safe=False)
+        redirect_url = 'http://localhost:5173/connected'
+        return HttpResponseRedirect(redirect_url)
     else:
         error_message = f'Failed to obtain access token. Response: {response.text}'
         return HttpResponse(error_message, status=response.status_code)

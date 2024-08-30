@@ -1,0 +1,24 @@
+
+.disconnect-button-container{
+    display: flex;
+    justify-content: center;
+}
+
+.disconnect-button{
+    padding: 8px 16px;
+    background-color: #a1352e;
+    margin-top: 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 10px;
+    height: 45px;
+  }
+  
+  .disconnect-button:hover{
+    background-color: #611a04;
+    transform: scale(1.05);
+  }

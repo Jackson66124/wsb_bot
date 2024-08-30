@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header.jsx'
-import MainContent from './pages/MainContent.jsx';
+import MainContent from './components/MainContent.jsx';
+import Connected from './pages/Connected.jsx';
 import Footer from './components/Footer.jsx'
 import Create from './pages/Create.jsx'
 import Login from './pages/Login.jsx'
@@ -28,6 +29,12 @@ function App() {
         <Route path="/home" element={
           <ProtectedRoute>
           <MainContent />
+          </ProtectedRoute>
+          } 
+        />
+          <Route path="/connected" element={
+          <ProtectedRoute>
+          <Connected/>
           </ProtectedRoute>
           } 
         />

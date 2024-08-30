@@ -3,6 +3,7 @@ import api from '../api'
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import '../styles/Form.css'
+import axios from "axios";
 
 function Form({route, method}) {
     const [username, setUsername] = useState("")
@@ -21,7 +22,18 @@ function Form({route, method}) {
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/home")
+
+                const token = localStorage.getItem(ACCESS_TOKEN);
+                const tokenCheckRes = await axios.get('http://127.0.0.1:8000/check-alpaca-token/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                if (tokenCheckRes.data.has_alpaca_token) {
+                    navigate("/connected")
+                } else {
+                    navigate("/home")
+                }
             } else {
                 navigate("/login")
             }

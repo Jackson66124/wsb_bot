@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import create_stock, get_stocks, create_top_stock, get_top_stock, callback_view, CreateUserView
+from .views import create_stock, get_stocks, create_top_stock, get_top_stock, callback_view, CreateUserView, check_alpaca_token
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
@@ -12,5 +12,6 @@ urlpatterns = [
     path('user/create/', CreateUserView.as_view(), name='create'),
     path('token/', TokenObtainPairView.as_view(), name='get_token'),
     path('token/refresh/', TokenRefreshView.as_view(), name='refresh_token'),
+    path('check-alpaca-token/', check_alpaca_token, name='check-alpaca-token'),
     path('-auth/', include("rest_framework.urls")),
 ]

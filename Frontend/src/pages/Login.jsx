@@ -7,7 +7,7 @@ function Login() {
     <div>
         <Form route="token/" method="login"/>
         <div className='login-redirect'>
-            <p>Do you need to create an account? <Link to="/create">Click here!</Link></p>
+            <p>Need to create an account? <Link to="/create">Click here!</Link></p>
         </div>
     </div>
 );    

@@ -2,20 +2,26 @@ import React from 'react';
 import StockCarousel from '../components/Carousel'
 import StockDatepicker from '../components/StockDatepicker';
 import '../styles/main.css'
+import '../styles/Default.css'
 import '../styles/TopStock.css'
 import FetchTopStock from '../fetchComponents/FetchTopStock';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const extra = {
   price: "$150",
+  description: ' has been identified as today’s top stock by our sentiment analysis bot. Our bot leverages a deep learning model trained on real data from r/wallstreetbets. ' +
+   'Click the button below to begin creating your account and connect it with Alpaca, allowing our bot to trade automatically on your behalf each day!'
 };
 
-const handleClick = (e) => {
-    e.preventDefault();
-    window.open("https://app.alpaca.markets/connect/417db213be83cf52f1eea3401059d617", '_blank', 'noopener,noreferrer');
+
+function MainContent() {
+
+    const navigate = useNavigate();
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        navigate('/login');
 }
-
-
-function Connected() {
 const { symbol } = FetchTopStock();
 let top_stock = symbol;
   return (
@@ -31,14 +37,13 @@ let top_stock = symbol;
             <h2>Top Stock of the Day</h2>
             <h3 className="top-stock-ticker">{stock}</h3>
             <p className="top-stock-price">{extra.price}</p>
-            <p className="top-stock-description">ACCOUNT CONNECTED!<br></br> Your Alpaca account has been successfully connected to our sentiment analysis bot.
-            The bot will now begin placing orders at 12pm every day that the stock market is open.</p>
+            <p className="top-stock-description">{stock + extra.description}</p>
         </div>
           </div>
         ))}
         </div>
-        <div className='disconnect-button-container'>
-            <button className='disconnect-button'onClick={handleClick}>Disconnect Account</button>
+        <div className='default-button-container'>
+            <button className='default-button'onClick={handleClick}>Log In</button>
         </div>
         <div>
         <StockDatepicker/>
@@ -47,4 +52,4 @@ let top_stock = symbol;
   );
 }
 
-export default Connected;
+export default MainContent;

@@ -7,7 +7,7 @@ import Create from './pages/Create.jsx'
 import Login from './pages/Login.jsx'
 import NotFound from './pages/NotFound.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import Home from './pages/Home.jsx'
+import Default from './pages/Default.jsx'
 import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 
 function Logout() {
@@ -38,7 +38,7 @@ function App() {
           </ProtectedRoute>
           } 
         />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Default />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/create" element={<CreateAndLogout />} />

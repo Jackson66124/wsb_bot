@@ -1,16 +1,14 @@
 import React from 'react';
 import StockCarousel from '../components/Carousel'
-import TopStock from '../components/StockOfTheDay'
 import ConnectAccount from '../components/ConnectAccount';
 import StockDatepicker from '../components/StockDatepicker';
 import '../styles/main.css'
+import '../styles/TopStock.css'
 import FetchTopStock from '../fetchComponents/FetchTopStock';
 
 const extra = {
   price: "$150",
-  description: ' has been identified as the top stock of the day by our sentiment analysis bot. Our bot uses a deep learning model that ' +
-  'has been trained on real data from r/wallstreetbets. Click the button below to connect your alpaca account and let our bot start trading for ' +
-  'you automatically, every day!'
+  description: 'LOG IN SUCCSESFUL! Click the button below to connect your alpaca account to your WSB Trader account and let our bot start trading for you today!'
 };
 
 function MainContent() {
@@ -25,11 +23,13 @@ let top_stock = symbol;
       <div>
       {top_stock.map((stock, index) => (
           <div key={index}>
-            <TopStock 
-              stock={stock} 
-              price={extra.price} 
-              description={extra.description} 
-            />
+          <div className="top-stock">
+            <h2>Top Stock of the Day</h2>
+            <h3 className="top-stock-ticker">{stock}</h3>
+            <p className="top-stock-price">{extra.price}</p>
+            <p className="top-stock-description">LOG IN SUCCESSFUL!<br></br>Click the button below to connect your Alpaca account
+               to your WSB Trader account and let our bot start trading for you today!</p>
+        </div>
           </div>
         ))}
         </div>

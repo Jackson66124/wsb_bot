@@ -94,17 +94,17 @@ def create_top_stock_http(top_stock):
     
     return None
 
-def create_stock_http(top_stock):
+def create_stock_http(stock):
     headers = {'X-Internal-Token': os.getenv('INTERNAL_API_TOKEN')}
     url = 'http://localhost:8000/stock/create/'
     
     try:
         response = requests.post(url, 
-                                 json={'symbol': top_stock},
+                                 json={'symbol': stock},
                                  headers=headers,
                                  timeout=10)
         response.raise_for_status()
-        print(f'Successfully created top stock: {top_stock}')
+        print(f'Successfully created stock: {stock}')
         return response.json()
     
     except requests.HTTPError as http_err:

@@ -63,7 +63,7 @@ def get_trending_stocks(stocks):
         for tick in tickers:
             for stock in stock_finder:
                 if stock == tick:
-                    if len(top_tickers) < 9:
+                    if len(top_tickers) < 10:
                         if stock not in checked_stock:
                             top_tickers.append(stock)
                             checked_stock.append(stock)

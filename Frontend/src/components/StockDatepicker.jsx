@@ -26,7 +26,7 @@ function StockDatepicker() {
 
     return (
         <div className="stock-datepicker">
-        <h1>Date Picker</h1>
+        <h1>Find Trending Stocks by Date on r/wallstreetbets</h1>
         <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}
@@ -36,7 +36,7 @@ function StockDatepicker() {
         />
         <ul className="datepicker-list">
             {symbols.map((symbol, index) => (
-                <li key={index}>{symbol}</li>
+                <li key={index}>${symbol}</li>
             ))}
         </ul>
         </div>

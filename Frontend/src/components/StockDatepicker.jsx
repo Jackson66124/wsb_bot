@@ -6,7 +6,7 @@ import { FetchDatePickerStocks } from "../fetchComponents/FetchDatePickerStocks"
 
 function StockDatepicker() {
     const [selectedDate, setSelectedDate] = useState(null);
-    const [apiDate, setApiDate] = useState(null);
+    const [apiDate, setApiDate] = useState(new Date().toISOString().split('T')[0]);
     const { symbols } = FetchDatePickerStocks(apiDate);
 
 

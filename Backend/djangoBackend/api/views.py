@@ -26,7 +26,8 @@ User = get_user_model()
 
 # Create your views here.
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@permission_classes([IsAuthenticatedOrInternal])
 def get_stocks(request):
     date_str = request.GET.get('date', None)
     if date_str:
@@ -61,7 +62,8 @@ def create_top_stock(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@permission_classes([IsAuthenticatedOrInternal])
 def get_top_stock(request):
     today = datetime.now().date()
     symbols = TopStock.objects.filter(date=today)

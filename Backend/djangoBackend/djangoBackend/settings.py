@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 from datetime import timedelta
+from corsheaders.defaults import default_headers
 
 load_dotenv()
 
@@ -152,3 +153,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'X-Internal-Token',
+]

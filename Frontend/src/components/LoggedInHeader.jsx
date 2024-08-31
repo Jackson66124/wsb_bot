@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../styles/header.css'
-import { ACCESS_TOKEN } from '../constants';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 function Header() {
     const navigate = useNavigate();

@@ -46,7 +46,7 @@ for post in data:
     if post["label"] == 1:
         top_pos_posts.append(post["title"])
 
-def check_for_stock(posts):
+def check_for_top_stock(posts):
     for title in posts:
         cleaned_string = re.sub(r'[^a-zA-Z ]', '', title)
         stock_finder = cleaned_string.split()
@@ -70,7 +70,7 @@ def get_trending_stocks(stocks):
 
 get_trending_stocks(trending_stocks)
 
-top_stock = check_for_stock(top_pos_posts)
+top_stock = check_for_top_stock(top_pos_posts)
 
 
 def create_top_stock_http(top_stock):

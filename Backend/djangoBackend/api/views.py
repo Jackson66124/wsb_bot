@@ -15,7 +15,6 @@ from django.shortcuts import get_object_or_404
 import pandas as pd
 from .custom_auth import InternalAPIAuthentication
 from rest_framework.decorators import authentication_classes, permission_classes
-from rest_framework_simplejwt.authentication import JWTAuthentication
 from .custom_permissions import IsAuthenticatedOrInternal
 from datetime import datetime
 
@@ -26,7 +25,7 @@ User = get_user_model()
 
 # Create your views here.
 @api_view(['GET'])
-@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
 def get_stocks(request):
     date_str = request.GET.get('date', None)
@@ -42,7 +41,7 @@ def get_stocks(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
 def create_stock(request):
     serializer = StockSerializer(data=request.data)
@@ -52,7 +51,7 @@ def create_stock(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
-@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
 def create_top_stock(request):
     serializer = TopStockSerializer(data=request.data)
@@ -62,7 +61,7 @@ def create_top_stock(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-@authentication_classes([JWTAuthentication, InternalAPIAuthentication])
+@authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
 def get_top_stock(request):
     today = datetime.now().date()

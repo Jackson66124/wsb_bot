@@ -69,6 +69,14 @@ def get_top_stock(request):
     serializer = TopStockSerializer(symbols, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@authentication_classes([InternalAPIAuthentication])
+@permission_classes([IsAuthenticatedOrInternal])
+def get_all_top_stocks(request):
+    symbols = TopStock.objects
+    serializer = TopStockSerializer(symbols, many=True)
+    return Response(serializer.data)
+
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

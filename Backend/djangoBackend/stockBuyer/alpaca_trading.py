@@ -1,9 +1,10 @@
 from dotenv import load_dotenv
-from daily_post import top_stock_of_day
+from daily_post import neg_stocks
 import requests
 import os
 import sys
 import django
+import alpaca_trade_api as tradeapi
 
 load_dotenv()
 
@@ -57,7 +58,38 @@ def place_real_order(stock, token):
         print(f"Failed to place order. Response: {response.text}")
         return None
     
+def sell_neg_stocks(neg_stocks, token):
+    print('nothing')
+    
+def get_all_top_stocks():
+    token = os.getenv("INTERNAL_API_TOKEN")
+    headers = {
+        'X-Internal-Token': token,
+        'Content-Type': 'application/json'
+    }
+    response = requests.get('http://127.0.0.1:8000/stock/all-topstock/', headers = headers)
+    if response.status_code == 200:
+        data = response.json()
+        extracted_symbols = [stock['symbol'] for stock in data]
+
+        return extracted_symbols
+    else:
+        raise Exception(f"Failed to fetch positions: {response.status_code} {response.text}")
+    
+def compare_to_neg_stocks(top_stocks, neg_stocks):
+    stocks_to_sell = []
+    for stock in top_stocks:
+        for stock2 in neg_stocks:
+            if stock == stock2:
+                stocks_to_sell.append(stock)
+    return stocks_to_sell
+    
 #Place paper order for every connected user
+all_top_stocks = get_all_top_stocks()
+sell = compare_to_neg_stocks(all_top_stocks, neg_stocks)
+
+
 user_tokens = UserToken.objects.all()
-for user_token in user_tokens:
-    place_paper_order(top_stock_of_day, user_token.token)
+# for user_token in user_tokens:
+#     # place_paper_order(top_stock_of_day, user_token.token)
+#     sell_neg_stocks(neg_stocks, user_token.token)

@@ -24,6 +24,7 @@ reddit = praw.Reddit(
 daily_posts = []
 top_tickers = []
 trending_stocks = []
+neg_stocks = []
 
 def get_top_posts():
     subreddit = reddit.subreddit("wallstreetbets")
@@ -41,10 +42,13 @@ predicted_labels = tf.argmax(predictions, axis=-1).numpy()
 
 data = [{"title": title, "label": label} for title, label in zip(daily_posts, predicted_labels)]
 top_pos_posts = []
+top_neg_posts = []
 
 for post in data:
     if post["label"] == 1:
         top_pos_posts.append(post["title"])
+    if post["label"] == 2:
+        top_neg_posts.append(post["title"])
 
 def check_for_top_stock(posts):
     for title in posts:
@@ -68,9 +72,22 @@ def get_trending_stocks(stocks):
                             top_tickers.append(stock)
                             checked_stock.append(stock)
 
+def get_neg_stocks(stocks):
+    checked_stock = []
+    for title in stocks:
+        cleaned_string = re.sub(r'[^a-zA-Z ]', '', title)
+        stock_finder = cleaned_string.split()
+        for tick in tickers:
+            for stock in stock_finder:
+                if stock == tick:               
+                    if stock not in checked_stock:
+                        neg_stocks.append(stock)
+
 get_trending_stocks(trending_stocks)
 
 top_stock = check_for_top_stock(top_pos_posts)
+
+get_neg_stocks(top_neg_posts)
 
 
 def create_top_stock_http(top_stock):
@@ -115,6 +132,7 @@ def create_stock_http(stock):
     
     return None
 
-top_stock_of_day = create_top_stock_http(top_stock)
-for ticker in top_tickers:
-    create_stock_http(ticker)
+# top_stock_of_day = create_top_stock_http(top_stock)
+# find_neg_stocks = ()
+# for ticker in top_tickers:
+#     create_stock_http(ticker)

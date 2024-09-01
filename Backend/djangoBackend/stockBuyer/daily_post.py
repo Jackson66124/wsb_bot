@@ -48,6 +48,7 @@ for post in data:
     if post["label"] == 1:
         top_pos_posts.append(post["title"])
     if post["label"] == 2:
+        print(post["title"])
         top_neg_posts.append(post["title"])
 
 def check_for_top_stock(posts):
@@ -82,6 +83,7 @@ def get_neg_stocks(stocks):
                 if stock == tick:               
                     if stock not in checked_stock:
                         neg_stocks.append(stock)
+                        checked_stock.append(stock)
 
 get_trending_stocks(trending_stocks)
 
@@ -132,7 +134,6 @@ def create_stock_http(stock):
     
     return None
 
-# top_stock_of_day = create_top_stock_http(top_stock)
-# find_neg_stocks = ()
-# for ticker in top_tickers:
-#     create_stock_http(ticker)
+create_top_stock_http(top_stock)
+for ticker in top_tickers:
+    create_stock_http(ticker)

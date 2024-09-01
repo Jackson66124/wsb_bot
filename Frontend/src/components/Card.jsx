@@ -19,7 +19,7 @@ function Card ({ stock, value, historicalData }) {
           <div style={{ width: '100%', height: '75px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart className='line-chart' data={historicalData}>
-              <YAxis domain={[minPrice, maxPrice]} axisLine={false} tick={false} />
+              { <YAxis domain={[minPrice, maxPrice]} axisLine={false} tick={false} /> }
                 <Line 
                   type="monotone" 
                   dataKey="price" 

@@ -34,7 +34,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', 'wsbbot-production.up.railway.app' ]
 
-CSRF_TRUSTED_ORIGINS = [ 'https://wsbbot-production.up.railway.app' ]
+CSRF_TRUSTED_ORIGINS = [ 'https://wsbbot-production.up.railway.app', 'https://wsb-bot-5lj7.vercel.app/' ]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -150,6 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  
     'https://wsbbot-production.up.railway.app/',
+    'https://wsb-bot-5lj7.vercel.app/',
 ]
 CORS_ALLOWS_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + [

@@ -3,7 +3,7 @@ import { ACCESS_TOKEN } from '../constants'
 import { Navigate, useNavigate } from "react-router-dom";
 
 const client_id = '417db213be83cf52f1eea3401059d617'
-const redirect_uri = "http://localhost:8000/callback/"
+const redirect_uri = "https://wsb-bot-5lj7.vercel.app/callback/"
 const auth_url = `https://app.alpaca.markets/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=trading`
 
 const ConnectAccount = () => {

@@ -121,7 +121,7 @@ def callback_view(request):
         'code': auth_code,
         'client_id': '417db213be83cf52f1eea3401059d617',
         'client_secret': os.getenv('alpaca_client_secret'),
-        'redirect_uri': 'http://localhost:8000/callback/',
+        'redirect_uri': 'https://wsb-bot-5lj7.vercel.app/callback/',
     }
     response = requests.post(url, data=data)
 
@@ -143,7 +143,7 @@ def callback_view(request):
         except Exception as e:
             return JsonResponse({'error': f'Error Updating Token: {str(e)}'}, status=500)
 
-        redirect_url = 'http://localhost:5173/connected'
+        redirect_url = 'https://wsb-bot-5lj7.vercel.app/connected'
         return HttpResponseRedirect(redirect_url)
     else:
         error_message = f'Failed to obtain access token. Response: {response.text}'

@@ -4,8 +4,8 @@ import StockDatepicker from '../components/StockDatepicker';
 import '../styles/main.css'
 import '../styles/TopStock.css'
 import '../styles/ConnectAccount.css'
-import FetchTopStock from '../fetchComponents/FetchTopStock';
 import { useNavigate } from 'react-router-dom';
+import StockOfDay from '../components/StockOfDay';
 
 const extra = {
   price: "$150",
@@ -25,8 +25,6 @@ function Connected() {
     }
   };
 
-  const { symbol } = FetchTopStock();
-  let top_stock = symbol;
     return (
       <div className='mainContent'>
         <h2 className = "mainContent-title">
@@ -34,17 +32,11 @@ function Connected() {
         </h2>
         <StockCarousel/>
         <div>
-        {top_stock.map((stock, index) => (
-            <div key={index}>
           <div className="top-stock">
-              <h2>Top Stock of the Day</h2>
-              <h3 className="top-stock-ticker">{stock}</h3>
-              <p className="top-stock-price">{extra.price}</p>
+            <StockOfDay/>
               <p className="top-stock-description">ACCOUNT CONNECTED!<br></br> Your Alpaca account has been successfully connected to our sentiment analysis bot.
               The bot will now begin placing orders at 12pm every day that the stock market is open.</p>
           </div>
-            </div>
-          ))}
           </div>
           <div className='disconnect-button-container'>
               <button className='disconnect-button'onClick={(e) => handleClick(e, 'disconnect')}>Disconnect Account</button>

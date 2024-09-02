@@ -23,7 +23,6 @@ function Arrow(props) {
     try {
         const response = await axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${api_key}`);
         const data = response.data;
-        console.log(data);
         return { symbol, ...data }
     } catch (error) {
         console.error(`Error fetching data for ${symbol}:`, error)
@@ -49,11 +48,11 @@ const StockCarousel = () => {
 
   const createHistoricalData = (stock) => {
     return [
-      { time: '09:30', price: stock.pc },  //Previous close
-      { time: '10:30', price: stock.o },   //Open
-      { time: '11:30', price: stock.l },   //Low
-      { time: '12:30', price: stock.h },   //High
-      { time: '13:30', price: stock.c },   //Current
+      { time: '09:30', price: stock.pc }, 
+      { time: '10:30', price: stock.o },  
+      { time: '11:30', price: stock.l },   
+      { time: '12:30', price: stock.h },   
+      { time: '13:30', price: stock.c },   
     ];
   };
 
@@ -93,7 +92,7 @@ const StockCarousel = () => {
               <div key={index}>
                 <Card 
                   stock={`$${stock.symbol}`} 
-                  value={stock.c} 
+                  value={'$' + stock.c} 
                   historicalData={createHistoricalData(stock)} 
                 />
               </div>

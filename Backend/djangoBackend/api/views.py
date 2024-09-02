@@ -40,6 +40,7 @@ def get_stocks(request):
     serializer = StockSerializer(symbols, many=True)
     return Response(serializer.data)
 
+
 @api_view(['POST'])
 @authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
@@ -49,6 +50,7 @@ def create_stock(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @authentication_classes([InternalAPIAuthentication])
@@ -60,6 +62,7 @@ def create_top_stock(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 @authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
@@ -69,6 +72,7 @@ def get_top_stock(request):
     serializer = TopStockSerializer(symbols, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 @authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
@@ -76,6 +80,7 @@ def get_all_top_stocks(request):
     symbols = TopStock.objects
     serializer = TopStockSerializer(symbols, many=True)
     return Response(serializer.data)
+
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -128,8 +133,6 @@ def callback_view(request):
 
     if response.status_code == 200:
         alpaca_access_token = response.json().get('access_token')
-        token_type = response.json().get('token_type')
-        scope = response.json().get('scope')
 
         try:
             user = get_object_or_404(User, id=user_id)

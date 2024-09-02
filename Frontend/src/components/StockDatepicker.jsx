@@ -10,6 +10,10 @@ function StockDatepicker() {
     const [apiDate, setApiDate] = useState(new Date().toISOString().split('T')[0]);
     const { symbols } = FetchDatePickerStocks(apiDate);
 
+    const handleClick = (e, stock) => {
+        e.preventDefault();
+        window.open(`https://www.nasdaq.com/market-activity/stocks/${stock}`, '_blank', 'noopener,noreferrer');
+    }
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -36,7 +40,7 @@ function StockDatepicker() {
         />
         <ul className="datepicker-list">
             {symbols.map((symbol, index) => (
-                <li key={index}>${symbol}</li>
+                <li onClick={(e) => handleClick(e, symbol)} key={index}>${symbol}</li>
             ))}
         </ul>
         </div>

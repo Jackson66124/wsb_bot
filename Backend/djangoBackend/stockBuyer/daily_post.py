@@ -12,8 +12,7 @@ load_dotenv()
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 model = load_model('Backend\model\WSB_Sentiment_Model')
-df = pd.read_csv('Backend\model\csv_files\stock_tickers.csv')
-tickers = df['Symbol'].tolist()
+tickers = pd.read_csv('Backend/model/csv_files/stock_tickers.csv')['Symbol'].tolist()
 
 reddit = praw.Reddit(
     client_id=os.getenv("client_id"),
@@ -25,115 +24,71 @@ daily_posts = []
 top_tickers = []
 trending_stocks = []
 neg_stocks = []
+top_stock = []
 
-def get_top_posts():
-    subreddit = reddit.subreddit("wallstreetbets")
-    get_posts = subreddit.top(time_filter='day', limit=500)
-    for post in get_posts:
-        daily_posts.append(post.title)
-        trending_stocks.append(post.title)
+def fetch_daily_posts(subreddit_name="wallstreetbets", limit=500):
+    subreddit = reddit.subreddit(subreddit_name)
+    posts = subreddit.top(time_filter='day', limit=limit)
+    return [post.title for post in posts]
 
-get_top_posts()
+def predict_sentiment(posts):
+    dataset = tf.data.Dataset.from_tensor_slices(posts).batch(32)
+    predictions = model.predict(dataset)
+    return tf.argmax(predictions, axis=-1).numpy()
 
-title_dataset = tf.data.Dataset.from_tensor_slices(daily_posts)
-title_dataset = title_dataset.batch(32)
-predictions = model.predict(title_dataset)
-predicted_labels = tf.argmax(predictions, axis=-1).numpy()
+def categorize_posts(posts, labels):
+    positive_posts = [posts[i] for i, label in enumerate(labels) if label == 1]
+    negative_posts = [posts[i] for i, label in enumerate(labels) if label == 2]
+    return positive_posts, negative_posts
 
-data = [{"title": title, "label": label} for title, label in zip(daily_posts, predicted_labels)]
-top_pos_posts = []
-top_neg_posts = []
 
-for post in data:
-    if post["label"] == 1:
-        top_pos_posts.append(post["title"])
-    if post["label"] == 2:
-        print(post["title"])
-        top_neg_posts.append(post["title"])
-
-def check_for_top_stock(posts):
+def extract_stocks_from_titles(posts, tickers):
+    extracted_stocks = []
     for title in posts:
-        cleaned_string = re.sub(r'[^a-zA-Z ]', '', title)
-        stock_finder = cleaned_string.split()
-        for tick in tickers:
-            for stock in stock_finder:
-                if stock == tick:
-                    return tick
+        words = re.sub(r'[^a-zA-Z ]', '', title).split()
+        for word in words:
+            if word in tickers and word not in extracted_stocks:
+                extracted_stocks.append(word)
+    return extracted_stocks
 
-def get_trending_stocks(stocks):
-    checked_stock = []
-    for title in stocks:
-        cleaned_string = re.sub(r'[^a-zA-Z ]', '', title)
-        stock_finder = cleaned_string.split()
-        for tick in tickers:
-            for stock in stock_finder:
-                if stock == tick:
-                    if len(top_tickers) < 10:
-                        if stock not in checked_stock:
-                            top_tickers.append(stock)
-                            checked_stock.append(stock)
-
-def get_neg_stocks(stocks):
-    checked_stock = []
-    for title in stocks:
-        cleaned_string = re.sub(r'[^a-zA-Z ]', '', title)
-        stock_finder = cleaned_string.split()
-        for tick in tickers:
-            for stock in stock_finder:
-                if stock == tick:               
-                    if stock not in checked_stock:
-                        neg_stocks.append(stock)
-                        checked_stock.append(stock)
-
-get_trending_stocks(trending_stocks)
-
-top_stock = check_for_top_stock(top_pos_posts)
-
-get_neg_stocks(top_neg_posts)
-
-
-def create_top_stock_http(top_stock):
+def post_stock_to_backend(stock, endpoint):
+    """Post stock data to the backend."""
+    url = f'http://localhost:8000/stock/create/{endpoint}'
     headers = {'X-Internal-Token': os.getenv('INTERNAL_API_TOKEN')}
-    url = 'http://localhost:8000/stock/create/topstock/'
     
     try:
-        response = requests.post(url, 
-                                 json={'symbol': top_stock},
-                                 headers=headers,
-                                 timeout=10)
+        response = requests.post(url, json={'symbol': stock}, headers=headers)
         response.raise_for_status()
-        print(f'Successfully created top stock: {top_stock}')
+        if endpoint == 'topstock/':
+            print(f'Successfully created top stock: {stock}')
+        else:
+            print(f'Successfully created stock: {stock}')
         return response.json()
-    
     except requests.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
         print(f"Response content: {response.content}")
     except Exception as err:
         print(f"An error occurred: {err}")
-    
     return None
 
-def create_stock_http(stock):
-    headers = {'X-Internal-Token': os.getenv('INTERNAL_API_TOKEN')}
-    url = 'http://localhost:8000/stock/create/'
-    
-    try:
-        response = requests.post(url, 
-                                 json={'symbol': stock},
-                                 headers=headers,
-                                 timeout=10)
-        response.raise_for_status()
-        print(f'Successfully created stock: {stock}')
-        return response.json()
-    
-    except requests.HTTPError as http_err:
-        print(f"HTTP error occurred: {http_err}")
-        print(f"Response content: {response.content}")
-    except Exception as err:
-        print(f"An error occurred: {err}")
-    
-    return None
+def main():
+    global daily_posts, top_tickers, trending_stocks, neg_stocks, top_stock
 
-create_top_stock_http(top_stock)
-for ticker in top_tickers:
-    create_stock_http(ticker)
+    daily_posts = fetch_daily_posts()
+    trending_stocks = daily_posts
+
+    labels = predict_sentiment(daily_posts)
+    top_pos_posts, top_neg_posts = categorize_posts(daily_posts, labels)
+
+    neg_stocks = extract_stocks_from_titles(top_neg_posts, tickers)
+
+    top_stock = extract_stocks_from_titles(top_pos_posts, tickers)
+    top_tickers = extract_stocks_from_titles(trending_stocks, tickers)
+
+    if top_stock:
+        post_stock_to_backend(top_stock[0], 'topstock/')
+    
+    for ticker in top_tickers:
+        post_stock_to_backend(ticker, '')
+
+main()

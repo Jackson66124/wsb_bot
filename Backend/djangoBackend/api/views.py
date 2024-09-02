@@ -121,7 +121,7 @@ def callback_view(request):
         'code': auth_code,
         'client_id': '417db213be83cf52f1eea3401059d617',
         'client_secret': os.getenv('alpaca_client_secret'),
-        'redirect_uri': 'https://wsb-bot-5lj7.vercel.app/callback/',
+        'redirect_uri': 'https://wsbbot-production.up.railway.app/callback/',
     }
     response = requests.post(url, data=data)
 

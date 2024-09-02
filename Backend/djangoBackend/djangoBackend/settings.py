@@ -147,7 +147,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',  
+    'https://wsbbot-production.up.railway.app/',
+]
 CORS_ALLOWS_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-Internal-Token',

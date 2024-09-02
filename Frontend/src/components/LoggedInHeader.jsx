@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import '../styles/header.css'
+import '../styles/Header.css'
 import { useNavigate } from 'react-router-dom';
 
 function Header() {

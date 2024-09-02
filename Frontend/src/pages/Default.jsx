@@ -1,7 +1,7 @@
 import React from 'react';
 import StockCarousel from '../components/Carousel'
 import StockDatepicker from '../components/StockDatepicker';
-import '../styles/main.css'
+import '../styles/Main.css'
 import '../styles/Default.css'
 import '../styles/TopStock.css'
 import { Navigate, useNavigate } from 'react-router-dom';

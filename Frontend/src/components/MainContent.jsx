@@ -2,7 +2,7 @@ import React from 'react';
 import StockCarousel from '../components/Carousel'
 import ConnectAccount from '../components/ConnectAccount';
 import StockDatepicker from '../components/StockDatepicker';
-import '../styles/main.css'
+import '../styles/Main.css'
 import '../styles/TopStock.css'
 import StockOfDay from './StockOfDay';
 

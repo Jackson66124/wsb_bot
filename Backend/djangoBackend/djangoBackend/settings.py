@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 import os
 from datetime import timedelta
 from corsheaders.defaults import default_headers
+import dj_database_url
 
 load_dotenv()
 
@@ -99,14 +100,7 @@ WSGI_APPLICATION = 'djangoBackend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('db_name'),
-        'USER': os.getenv('db_user'),
-        'PASSWORD': os.getenv('db_password'),
-        'HOST': os.getenv('db_host'),
-        'PORT': os.getenv('db_port'), 
-    }
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL')) 
 }
 
 

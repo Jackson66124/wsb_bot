@@ -32,7 +32,9 @@ SECRET_KEY = os.getenv('django_secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', 'wsbbot-production.up.railway.app' ]
+
+CSRF_TRUSTED_ORIGINS = [ 'https://wsbbot-production.up.railway.app' ]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -145,7 +147,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWS_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-Internal-Token',

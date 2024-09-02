@@ -7,10 +7,6 @@ import '../styles/ConnectAccount.css'
 import { useNavigate } from 'react-router-dom';
 import StockOfDay from '../components/StockOfDay';
 
-const extra = {
-  price: "$150",
-};
-
 
 function Connected() {
   const navigate = useNavigate();

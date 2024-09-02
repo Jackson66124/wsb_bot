@@ -48,11 +48,11 @@ const StockCarousel = () => {
 
   const createHistoricalData = (stock) => {
     return [
-      { time: '09:30', price: stock.pc }, 
-      { time: '10:30', price: stock.o },  
-      { time: '11:30', price: stock.l },   
-      { time: '12:30', price: stock.h },   
-      { time: '13:30', price: stock.c },   
+      { price: stock.pc }, 
+      { price: stock.o },  
+      { price: stock.l },   
+      { price: stock.h },   
+      { price: stock.c },   
     ];
   };
 

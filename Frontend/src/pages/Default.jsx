@@ -7,12 +7,6 @@ import '../styles/TopStock.css'
 import { Navigate, useNavigate } from 'react-router-dom';
 import StockOfDay from '../components/StockOfDay';
 
-const extra = {
-  price: "$150",
-  description: ' The stock above has been identified as today’s top stock by our sentiment analysis bot. Our bot leverages a deep learning model trained on real data from r/wallstreetbets. ' +
-   'Click the button below to begin creating your account and connect it with Alpaca, allowing our bot to trade automatically on your behalf each day!'
-};
-
 
 function MainContent() {
 

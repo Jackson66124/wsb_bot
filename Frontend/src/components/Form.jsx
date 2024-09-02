@@ -24,7 +24,7 @@ function Form({route, method}) {
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
 
                 const token = localStorage.getItem(ACCESS_TOKEN);
-                const tokenCheckRes = await axios.get('http://127.0.0.1:8000/check-alpaca-token/', {
+                const tokenCheckRes = await axios.get('https://wsbbot-production.up.railway.app/check-alpaca-token/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

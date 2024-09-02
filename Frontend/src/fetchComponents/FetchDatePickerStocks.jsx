@@ -13,7 +13,7 @@ export function FetchDatePickerStocks(date) {
                     'Content-Type': 'application/json'
                 };
         
-                const url = `http://127.0.0.1:8000/stock/?date=${date}`;
+                const url = `https://wsbbot-production.up.railway.app/stock/?date=${date}`;
                 const response = await axios.get(url, { headers });
         
                 const extractedSymbols = response.data.map(stock => stock.symbol);

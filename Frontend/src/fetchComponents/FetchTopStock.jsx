@@ -13,7 +13,7 @@ const FetchTopStock = () => {
                 'Content-Type': 'application/json'
             };
     
-            const url = `http://127.0.0.1:8000/stock/topstock/`;
+            const url = `https://wsbbot-production.up.railway.app/stock/topstock/`;
             const response = await axios.get(url, { headers });
     
             const extractedSymbols = response.data.map(stock => stock.symbol);

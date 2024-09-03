@@ -10,9 +10,9 @@ const ConnectAccount = () => {
     const handleClick = (e) => {
         e.preventDefault();
         const token = localStorage.getItem(ACCESS_TOKEN);
+        const auth_url_token = `${auth_url}&state=${encodeURIComponent(token)}`;
         if (token) {
-            document.cookie = `temp_jwt=${token}; path=/`;
-            window.location.href = auth_url;
+            window.location.href = auth_url_token;
         } else {
             console.error("No JWT token found in localStorage");
             Navigate("/login")

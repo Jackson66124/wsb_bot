@@ -107,7 +107,7 @@ def check_alpaca_token(request):
 
 def callback_view(request):
     auth_code = request.GET.get('code')
-    jwt_token = request.COOKIES.get('temp_jwt')
+    jwt_token = request.GET.get('state')
 
     if not auth_code:
         return HttpResponse("No authorization code found", status=400)

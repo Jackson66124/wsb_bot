@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const FetchTopStock = () => {
+const FetchTopStock = (date) => {
     const [symbol, SetSymbol] = useState([]);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ const FetchTopStock = () => {
                 'Content-Type': 'application/json'
             };
     
-            const url = `https://wsbbot-production.up.railway.app/stock/topstock/`;
+            const url = `https://wsbbot-production.up.railway.app/stock/topstock/?date=${date}`;
             const response = await axios.get(url, { headers });
     
             const extractedSymbols = response.data.map(stock => stock.symbol);

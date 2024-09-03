@@ -67,9 +67,17 @@ def create_top_stock(request):
 @authentication_classes([InternalAPIAuthentication])
 @permission_classes([IsAuthenticatedOrInternal])
 def get_top_stock(request):
-    today = datetime.now().date()
-    symbols = TopStock.objects.filter(date=today)
-    serializer = TopStockSerializer(symbols, many=True)
+    date_str = request.GET.get('date', None)
+    if date_str:
+        try:
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+            symbol = TopStock.objects.filter(date=date_obj)
+        except:
+            return Response({'Error'}, status=400)
+    else:        
+        today = datetime.now().date()
+        symbol = TopStock.objects.filter(date=today)
+    serializer = TopStockSerializer(symbol, many=True)
     return Response(serializer.data)
 
 

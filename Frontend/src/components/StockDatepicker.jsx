@@ -5,9 +5,18 @@ import '../styles/Datepicker.css'
 import { FetchDatePickerStocks } from "../fetchComponents/FetchDatePickerStocks";
 import '../styles/Connected.css'
 
+const getDate = () => {
+    const date = new Date();
+    const hours = date.getHours();
+  if (hours < 12) {
+    date.setDate(date.getDate() - 1);
+  }
+    return date.toISOString().split('T')[0];
+  };
+
 function StockDatepicker() {
     const [selectedDate, setSelectedDate] = useState(null);
-    const [apiDate, setApiDate] = useState(new Date().toISOString().split('T')[0]);
+    const [apiDate, setApiDate] = useState(getDate());
     const { symbols } = FetchDatePickerStocks(apiDate);
 
     const handleClick = (e, stock) => {

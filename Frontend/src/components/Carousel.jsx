@@ -30,9 +30,17 @@ function Arrow(props) {
     }
 };
 
-const today = new Date().toISOString().split('T')[0];
+const getDate = () => {
+  const date = new Date();
+  const hours = date.getHours();
+if (hours < 12) {
+  date.setDate(date.getDate() - 1);
+}
+  return date.toISOString().split('T')[0];
+};
 
 const StockCarousel = () => {
+  const today = getDate();
   const { symbols } = FetchTrendingStocks({ date: today });
   const [stocksData, setStocksData] = useState([]);
 

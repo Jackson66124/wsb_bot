@@ -17,7 +17,6 @@ from .custom_auth import InternalAPIAuthentication
 from rest_framework.decorators import authentication_classes, permission_classes
 from .custom_permissions import IsAuthenticatedOrInternal
 from datetime import datetime
-from urllib.parse import quote
 
 
 load_dotenv()
@@ -144,8 +143,7 @@ def callback_view(request):
         except Exception as e:
             return JsonResponse({'error': f'Error Updating Token: {str(e)}'}, status=500)
 
-        encoded_jwt = quote(jwt_token)
-        redirect_url = f'https://wsb-bot-5lj7.vercel.app/connected?jwt={encoded_jwt}'
+        redirect_url = 'https://wsb-bot-5lj7.vercel.app/connected/'
         return HttpResponseRedirect(redirect_url)
     else:
         error_message = f'Failed to obtain access token. Response: {response.text}'

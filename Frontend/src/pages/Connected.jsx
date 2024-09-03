@@ -12,19 +12,6 @@ import { ACCESS_TOKEN } from '../constants';
 
 function Connected() {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const jwtToken = searchParams.get('jwt');
-
-    if (jwtToken) {
-      console.log("GOT TOKEN")
-      localStorage.setItem(ACCESS_TOKEN, jwtToken)
-      window.history.replaceState({}, document.title, "/connected");
-      navigate('/connected')
-    }
-  })
 
   const handleClick = (e, linkType) => {
     e.preventDefault();

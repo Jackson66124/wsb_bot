@@ -31,4 +31,4 @@ jobs:
 
       - name: Run script
         run: |
-          python ../djangoBackend/stockBuyer/alpaca_trading.py
+          python ../../djangoBackend/stockBuyer/alpaca_trading.py

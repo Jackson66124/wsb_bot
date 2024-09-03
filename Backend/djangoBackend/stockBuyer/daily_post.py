@@ -15,8 +15,8 @@ model = load_model('Backend\model\WSB_Sentiment_Model')
 tickers = pd.read_csv('Backend/model/csv_files/stock_tickers.csv')['Symbol'].tolist()
 
 reddit = praw.Reddit(
-    client_id=os.getenv("client_id"),
-    client_secret=os.getenv("client_secret"),
+    client_id=os.getenv("CLIENT_ID"),
+    client_secret=os.getenv("CLIENT_SECRET"),
     user_agent='WSB_Bot by Jackson Kight'
 )
 

@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Default from './pages/Default.jsx'
 import { BrowserRouter as Router, Route, Routes, Navigate, BrowserRouter, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function Logout() {
   localStorage.clear()
@@ -23,9 +24,14 @@ function CreateAndLogout() {
 
 const ConditionalHeader = () => {
   const location = useLocation();
-  const isProtectedRoute = ['/home', '/connected'].includes(location.pathname);
+  const [headerType, setHeaderType] = useState('regular');
 
-  return isProtectedRoute ? <LoggedInHeader /> : <Header />;
+  useEffect(() => {
+    const isProtectedRoute = ['/home', '/connected'].includes(location.pathname);
+    setHeaderType(isProtectedRoute ? 'loggedIn' : 'regular');
+  }, [location.pathname]);
+
+  return headerType === 'loggedIn' ? <LoggedInHeader /> : <Header />;
 };
 
 function App() {

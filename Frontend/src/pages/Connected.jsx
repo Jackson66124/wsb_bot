@@ -4,12 +4,26 @@ import StockDatepicker from '../components/StockDatepicker';
 import '../styles/Main.css'
 import '../styles/TopStock.css'
 import '../styles/ConnectAccount.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import StockOfDay from '../components/StockOfDay';
+import { ACCESS_TOKEN } from '../constants';
 
 
 function Connected() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const isRedirect = document.referrer.includes('alpaca.markets');
+    const searchParams = new URLSearchParams(location.search);
+    const jwtToken = searchParams.get('jwt');
+
+    if (isRedirect) {
+      localStorage.setItem(ACCESS_TOKEN, jwtToken)
+      window.history.replaceState({}, document.title, "/connected");
+    }
+  })
 
   const handleClick = (e, linkType) => {
     e.preventDefault();

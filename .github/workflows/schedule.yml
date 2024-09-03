@@ -2,7 +2,7 @@ name: Run Python Script Daily
 
 on:
   schedule:
-    - cron: '58 16 * * *'
+    - cron: '50 14 * * *'
   workflow_dispatch:
 
 env:

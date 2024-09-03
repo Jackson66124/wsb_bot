@@ -11,8 +11,8 @@ load_dotenv()
 #allow console utf-8 encoding for emojis for testing
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-model = load_model('Backend\model\WSB_Sentiment_Model')
-tickers = pd.read_csv('Backend/model/csv_files/stock_tickers.csv')['Symbol'].tolist()
+model = load_model('..\..\model\WSB_Sentiment_Model')
+tickers = pd.read_csv('..\..\model\csv_files\stock_tickers.csv')['Symbol'].tolist()
 
 reddit = praw.Reddit(
     client_id=os.getenv("CLIENT_ID"),
@@ -52,7 +52,6 @@ def extract_stocks_from_titles(posts, tickers):
     return extracted_stocks
 
 def post_stock_to_backend(stock, endpoint):
-    """Post stock data to the backend."""
     url = f'https://wsbbot-production.up.railway.app/stock/create/{endpoint}'
     headers = {'X-Internal-Token': os.getenv('INTERNAL_API_TOKEN')}
     

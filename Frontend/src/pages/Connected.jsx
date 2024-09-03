@@ -15,11 +15,10 @@ function Connected() {
   const location = useLocation();
 
   useEffect(() => {
-    const isRedirect = document.referrer.includes('alpaca.markets');
     const searchParams = new URLSearchParams(location.search);
     const jwtToken = searchParams.get('jwt');
 
-    if (isRedirect) {
+    if (jwtToken) {
       localStorage.setItem(ACCESS_TOKEN, jwtToken)
       window.history.replaceState({}, document.title, "/connected");
     }

@@ -19,8 +19,10 @@ function Connected() {
     const jwtToken = searchParams.get('jwt');
 
     if (jwtToken) {
+      console.log("GOT TOKEN")
       localStorage.setItem(ACCESS_TOKEN, jwtToken)
       window.history.replaceState({}, document.title, "/connected");
+      navigate('/connected')
     }
   })
 

@@ -34,7 +34,7 @@ function StockDatepicker() {
         }
     };
     
-    const minDate = new Date("2024-09-02");
+    const minDate = new Date("2024-09-03");
     const maxDate = new Date();
 
     return (

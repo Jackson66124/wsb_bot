@@ -17,15 +17,15 @@ const getStockData = async (symbol) => {
 const getDate = () => {
   const date = new Date();
   const hours = date.getHours();
-if (hours < 12) {
-  date.setDate(date.getDate() - 1);
-}
+  if (hours < 12) {
+    date.setDate(date.getDate() - 1);
+  }
   return date.toISOString().split('T')[0];
 };
 
 function StockOfDay() {
     const today = getDate();
-    const { symbol } = FetchTopStock({date: today});
+    const { symbol } = FetchTopStock({ date: today });
     const [stockData, setStockData] = useState([]);
   
     useEffect(() => {

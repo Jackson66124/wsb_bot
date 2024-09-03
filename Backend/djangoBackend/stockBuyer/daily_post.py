@@ -53,7 +53,7 @@ def extract_stocks_from_titles(posts, tickers):
 
 def post_stock_to_backend(stock, endpoint):
     """Post stock data to the backend."""
-    url = f'http://localhost:8000/stock/create/{endpoint}'
+    url = f'https://wsbbot-production.up.railway.app/stock/create/{endpoint}'
     headers = {'X-Internal-Token': os.getenv('INTERNAL_API_TOKEN')}
     
     try:
@@ -87,8 +87,12 @@ def main():
 
     if top_stock:
         post_stock_to_backend(top_stock[0], 'topstock/')
+
+    count = 0;    
     
     for ticker in top_tickers:
-        post_stock_to_backend(ticker, '')
+        if count < 10:
+            post_stock_to_backend(ticker, '')
+            count += 1
 
 main()

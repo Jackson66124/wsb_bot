@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const FetchTopStock = (date) => {
+const FetchTopstock = ( {date} ) => {
     const [symbol, SetSymbol] = useState([]);
 
     useEffect(() => {
@@ -30,5 +30,4 @@ const FetchTopStock = (date) => {
 
   };
 
-
-export default FetchTopStock;
+export default FetchTopstock;

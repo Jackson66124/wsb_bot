@@ -48,11 +48,14 @@ def categorize_posts(posts, labels):
 def extract_stocks_from_titles(posts, tickers):
     extracted_stocks = []
     for title in posts:
-        words = re.sub(r'[^a-zA-Z ]', '', title).split()
+        words = splitPosts(title)
         for word in words:
             if word in tickers and word not in extracted_stocks:
                 extracted_stocks.append(word)
     return extracted_stocks
+
+def splitPosts(title):
+    return re.sub(r'\$', '', title).split()
 
 def post_stock_to_backend(stock, endpoint):
     url = f'https://wsbbot-production.up.railway.app/stock/create/{endpoint}'

@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from daily_post import neg_stocks, top_stock
+from daily_post import neg_stocks, top_stocks
 import requests
 import os
 import sys
@@ -62,4 +62,5 @@ user_tokens = UserToken.objects.all()
 for user_token in user_tokens:
     for stock in neg_stocks:
         place_paper_order(stock, user_token.token, 'sell')
-    place_paper_order(top_stock[0], user_token.token, 'buy')
+    for stock in top_stocks:
+        place_paper_order(stock, user_token.token, 'buy')

@@ -6,7 +6,8 @@ import { FetchDatePickerStocks } from "../fetchComponents/FetchDatePickerStocks"
 import '../styles/Connected.css'
 
 const getDate = () => {
-    const date = new Date();
+    const utc = new Date();
+    const date = new Date(utc.getTime() - 4 * 60 * 60 * 1000);
     const hours = date.getHours();
   if (hours < 12) {
     date.setDate(date.getDate() - 1);

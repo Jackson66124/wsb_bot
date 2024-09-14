@@ -15,11 +15,12 @@ const getStockData = async (symbol) => {
 };
 
 const getDate = () => {
-  const date = new Date();
+  const utc = new Date();
+  const date = new Date(utc.getTime() - 4 * 60 * 60 * 1000);
   const hours = date.getHours();
-  if (hours < 12) {
-    date.setDate(date.getDate() - 1);
-  }
+if (hours < 12) {
+  date.setDate(date.getDate() - 1);
+}
   return date.toISOString().split('T')[0];
 };
 

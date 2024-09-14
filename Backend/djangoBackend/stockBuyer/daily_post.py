@@ -27,7 +27,7 @@ daily_posts = []
 top_tickers = []
 trending_stocks = []
 neg_stocks = []
-top_stock = []
+top_stocks = []
 
 def fetch_daily_posts(subreddit_name="wallstreetbets", limit=500):
     subreddit = reddit.subreddit(subreddit_name)
@@ -44,13 +44,13 @@ def categorize_posts(posts, labels):
     negative_posts = [posts[i] for i, label in enumerate(labels) if label == 2]
     return positive_posts, negative_posts
 
-
+banned_stocks = ["A", "I", "K" "B", "T", "M", "OK", "US", "X", "AI"]
 def extract_stocks_from_titles(posts, tickers):
     extracted_stocks = []
     for title in posts:
         words = splitPosts(title)
         for word in words:
-            if word in tickers and word not in extracted_stocks:
+            if word in tickers and word not in extracted_stocks and word not in banned_stocks:
                 extracted_stocks.append(word)
     return extracted_stocks
 
@@ -77,7 +77,7 @@ def post_stock_to_backend(stock, endpoint):
     return None
 
 def main():
-    global daily_posts, top_tickers, trending_stocks, neg_stocks, top_stock
+    global daily_posts, top_tickers, trending_stocks, neg_stocks, top_stocks
 
     daily_posts = fetch_daily_posts()
     trending_stocks = daily_posts
@@ -87,11 +87,11 @@ def main():
 
     neg_stocks = extract_stocks_from_titles(top_neg_posts, tickers)
 
-    top_stock = extract_stocks_from_titles(top_pos_posts, tickers)
+    top_stocks = extract_stocks_from_titles(top_pos_posts, tickers)
     top_tickers = extract_stocks_from_titles(trending_stocks, tickers)
 
-    if top_stock:
-        post_stock_to_backend(top_stock[0], 'topstock/')
+    if top_stocks:
+        post_stock_to_backend(top_stocks[0], 'topstock/')
 
     count = 0;    
     

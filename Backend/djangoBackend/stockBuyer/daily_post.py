@@ -44,7 +44,7 @@ def categorize_posts(posts, labels):
     negative_posts = [posts[i] for i, label in enumerate(labels) if label == 2]
     return positive_posts, negative_posts
 
-banned_stocks = ["A", "I", "K" "B", "T", "M", "OK", "US", "X", "AI"]
+banned_stocks = ["A", "I", "K" "B", "T", "M", "OK", "US", "X", "AI", "EU"]
 def extract_stocks_from_titles(posts, tickers):
     extracted_stocks = []
     for title in posts:

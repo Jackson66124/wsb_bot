@@ -39,6 +39,7 @@ model = tf_keras.Sequential([
     output_dim=32,
     mask_zero=True
   ),
+  tf_keras.layers.LSTM(32, return_sequences=True),
   tf_keras.layers.LSTM(16, return_sequences=False),
   tf_keras.layers.Dropout(0.4),
   tf_keras.layers.Dense(3, activation='Softmax')

@@ -1,29 +1,30 @@
-import '../styles/ConnectAccount.css'
-import { ACCESS_TOKEN } from '../constants'
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ACCESS_TOKEN } from "../constants";
+import { ALPACA_AUTH_URL } from "../config";
+import "../styles/ConnectAccount.css";
 
-const client_id = '417db213be83cf52f1eea3401059d617'
-const redirect_uri = "https://wsbbot-production.up.railway.app/callback/"
-const auth_url = `https://app.alpaca.markets/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=trading`
+function ConnectAccount() {
+  const navigate = useNavigate();
 
-const ConnectAccount = () => {
-    const handleClick = (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem(ACCESS_TOKEN);
-        const auth_url_token = `${auth_url}&state=${encodeURIComponent(token)}`;
-        if (token) {
-            window.location.href = auth_url_token;
-        } else {
-            console.error("No JWT token found in localStorage");
-            Navigate("/login")
-        }
-    };
+  const handleClick = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem(ACCESS_TOKEN);
 
-    return (
-        <div className="connect-account">
-            <button className="connect-account-button" onClick={handleClick}>Connect Your Account</button>
-        </div>
-    );
+    if (token) {
+      window.location.href = `${ALPACA_AUTH_URL}&state=${encodeURIComponent(token)}`;
+    } else {
+      console.error("No JWT token found in localStorage");
+      navigate("/login");
+    }
+  };
+
+  return (
+    <div className="connect-account">
+      <button className="connect-account-button" onClick={handleClick}>
+        Connect Your Account
+      </button>
+    </div>
+  );
 }
 
 export default ConnectAccount;

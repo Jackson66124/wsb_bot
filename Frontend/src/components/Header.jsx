@@ -1,21 +1,21 @@
-import { Link } from 'react-router-dom'
-import '../styles/Header.css'
+import { Link } from "react-router-dom";
+import "../styles/Header.css";
 
 function Header() {
-
-    return(
+  return (
     <div className="header">
-        <header>
-            <h1 className="header-title"><Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>WSB Trader</Link>
-                    <Link to="/login">
-                    <button className="login-button">
-                    Log In
-                  </button>
-                  </Link>
-                    </h1>
-        </header>
+      <header>
+        <h1 className="header-title">
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            WSB Trader
+          </Link>
+          <Link to="/login">
+            <button className="login-button">Log In</button>
+          </Link>
+        </h1>
+      </header>
     </div>
-    );
+  );
 }
 
-export default Header
+export default Header;

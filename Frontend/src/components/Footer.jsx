@@ -1,19 +1,18 @@
-import '../styles/Footer.css'
+import "../styles/Footer.css";
 
 function Footer() {
-
-    return (
+  return (
     <footer className="footer">
-        <div className="footer-content">
-        <p>&copy; 2024 WSB Atutomations. All rights reserved.</p>
-                <ul className="footer-links">
-                    <li><a href="/privacy">Privacy Policy</a></li>
-                    <li><a href="/terms">Terms of Service</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                </ul>
-        </div>        
+      <div className="footer-content">
+        <p>&copy; 2024 WSB Automations. All rights reserved.</p>
+        <ul className="footer-links">
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
     </footer>
-);
+  );
 }
 
-export default Footer
+export default Footer;
